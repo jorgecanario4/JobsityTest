@@ -1,1 +1,8 @@
+#Ignore Maven's:
 /target/
+
+#Ignore TestNG's:
+/test-output/
+
+#Ignore MacOS':
+.DS_Store
