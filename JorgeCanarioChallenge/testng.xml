@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<parameter name="URL" value="http://automationpractice.com/index.php"/>
+		<test name="Google Chrome Browser Test">
+		<parameter name="Browser" value="Chrome"/>
+			<classes>
+				<class name="com.challenge.test.SearchTest" />
+				<class name="com.challenge.test.ContactFormTest" />
+				<class name="com.challenge.test.ShoppingCartNavigationWidgetTest" />
+			</classes>
+		</test>
+		<test name="Mozilla Firefox Browser Test">
+		<parameter name="Browser" value="Firefox"/>
+			<classes>
+				<class name="com.challenge.test.SearchTest" />
+				<class name="com.challenge.test.ContactFormTest" />
+				<class name="com.challenge.test.ShoppingCartNavigationWidgetTest" />
+			</classes>
+		</test> 
+		<test name="Microsoft Internet Explorer Browser Test">
+		<parameter name="Browser" value="IE 11"/>
+			<classes>
+				<class name="com.challenge.test.SearchTest" />
+				<class name="com.challenge.test.ContactFormTest" />
+				<class name="com.challenge.test.ShoppingCartNavigationWidgetTest" />
+			</classes>
+		</test>
+		<test name="Apple Safari Browser Test">
+		<parameter name="Browser" value="Safari"/>
+			<classes>
+				<class name="com.challenge.test.SearchTest" />
+				<class name="com.challenge.test.ContactFormTest" />
+				<class name="com.challenge.test.ShoppingCartNavigationWidgetTest" />
+			</classes>
+		</test>
+		
+</suite> 

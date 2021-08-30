@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <parameter name="URL" value="http://automationpractice.com/index.php"/>
+  <test thread-count="5" name="Google Chrome Browser Test(failed)">
+    <parameter name="Browser" value="Chrome"/>
+    <classes>
+      <class name="com.challenge.test.SearchTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="search_ExistingProduct_ShowResult"/>
+          <include name="search_unexistingProduct_ShowNoResult" invocation-numbers="0"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.challenge.test.SearchTest -->
+      <class name="com.challenge.test.ContactFormTest">
+        <methods>
+          <include name="pageValidates_FormFieldSubject_CannotBeBlank"/>
+          <include name="pageValidates_FormFieldMessage_CannotBeBlank"/>
+          <include name="afterClass"/>
+          <include name="messageAttachment_CanBeSentInForm_Successfully"/>
+          <include name="pageValidates_FormFieldEmail_MustFollowRightFormat"/>
+          <include name="beforeClass"/>
+          <include name="pageValidates_FormFieldEmail_CannotBeBlank"/>
+          <include name="pageValidates_AllFormsFields_CannotBeBlank"/>
+        </methods>
+      </class> <!-- com.challenge.test.ContactFormTest -->
+      <class name="com.challenge.test.ShoppingCartNavigationWidgetTest">
+        <methods>
+          <include name="shoppingCartWidgetCheckOutBtn_RedirectToShoppingCartPage_Successfully"/>
+          <include name="shoppingCartWidget_Contains_AddedItems"/>
+          <include name="shoppingCartWidgetItems_CanBeDeleted_Successfully"/>
+          <include name="beforeClass"/>
+          <include name="itemsFromCategorySection_CanBeAddedToCart_Successfully"/>
+          <include name="itemsSearched_CanBeAddedToCart_Successfully"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.challenge.test.ShoppingCartNavigationWidgetTest -->
+    </classes>
+  </test> <!-- Google Chrome Browser Test(failed) -->
+  <test thread-count="5" name="Mozilla Firefox Browser Test(failed)">
+    <parameter name="Browser" value="Firefox"/>
+    <classes>
+      <class name="com.challenge.test.ContactFormTest">
+        <methods>
+          <include name="pageValidates_FormFieldSubject_CannotBeBlank"/>
+          <include name="pageValidates_FormFieldMessage_CannotBeBlank"/>
+          <include name="afterClass"/>
+          <include name="messageAttachment_CanBeSentInForm_Successfully"/>
+          <include name="beforeClass"/>
+        </methods>
+      </class> <!-- com.challenge.test.ContactFormTest -->
+      <class name="com.challenge.test.ShoppingCartNavigationWidgetTest">
+        <methods>
+          <include name="shoppingCartWidgetCheckOutBtn_RedirectToShoppingCartPage_Successfully"/>
+          <include name="shoppingCartWidget_Contains_AddedItems"/>
+          <include name="shoppingCartWidgetItems_CanBeDeleted_Successfully"/>
+          <include name="beforeClass"/>
+          <include name="itemsFromCategorySection_CanBeAddedToCart_Successfully"/>
+          <include name="itemsSearched_CanBeAddedToCart_Successfully"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.challenge.test.ShoppingCartNavigationWidgetTest -->
+    </classes>
+  </test> <!-- Mozilla Firefox Browser Test(failed) -->
+  <test thread-count="5" name="Microsoft Internet Explorer Browser Test(failed)">
+    <parameter name="Browser" value="IE 11"/>
+    <classes>
+      <class name="com.challenge.test.SearchTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="search_ExistingProduct_ShowResult"/>
+          <include name="search_unexistingProduct_ShowNoResult"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.challenge.test.SearchTest -->
+      <class name="com.challenge.test.ContactFormTest">
+        <methods>
+          <include name="pageValidates_FormFieldSubject_CannotBeBlank"/>
+          <include name="pageValidates_FormFieldMessage_CannotBeBlank"/>
+          <include name="afterClass"/>
+          <include name="messageAttachment_CanBeSentInForm_Successfully"/>
+          <include name="pageValidates_FormFieldEmail_MustFollowRightFormat"/>
+          <include name="beforeClass"/>
+          <include name="pageValidates_FormFieldEmail_CannotBeBlank"/>
+          <include name="pageValidates_AllFormsFields_CannotBeBlank"/>
+        </methods>
+      </class> <!-- com.challenge.test.ContactFormTest -->
+      <class name="com.challenge.test.ShoppingCartNavigationWidgetTest">
+        <methods>
+          <include name="shoppingCartWidgetCheckOutBtn_RedirectToShoppingCartPage_Successfully"/>
+          <include name="shoppingCartWidget_Contains_AddedItems"/>
+          <include name="shoppingCartWidgetItems_CanBeDeleted_Successfully"/>
+          <include name="beforeClass"/>
+          <include name="itemsFromCategorySection_CanBeAddedToCart_Successfully"/>
+          <include name="itemsSearched_CanBeAddedToCart_Successfully"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.challenge.test.ShoppingCartNavigationWidgetTest -->
+    </classes>
+  </test> <!-- Microsoft Internet Explorer Browser Test(failed) -->
+  <test thread-count="5" name="Apple Safari Browser Test(failed)">
+    <parameter name="Browser" value="Safari"/>
+    <classes>
+      <class name="com.challenge.test.SearchTest">
+        <methods>
+          <include name="beforeClass"/>
+          <include name="search_ExistingProduct_ShowResult"/>
+          <include name="search_unexistingProduct_ShowNoResult"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.challenge.test.SearchTest -->
+      <class name="com.challenge.test.ContactFormTest">
+        <methods>
+          <include name="pageValidates_FormFieldSubject_CannotBeBlank"/>
+          <include name="pageValidates_FormFieldMessage_CannotBeBlank"/>
+          <include name="afterClass"/>
+          <include name="messageAttachment_CanBeSentInForm_Successfully"/>
+          <include name="pageValidates_FormFieldEmail_MustFollowRightFormat"/>
+          <include name="beforeClass"/>
+          <include name="pageValidates_FormFieldEmail_CannotBeBlank"/>
+          <include name="pageValidates_AllFormsFields_CannotBeBlank"/>
+        </methods>
+      </class> <!-- com.challenge.test.ContactFormTest -->
+      <class name="com.challenge.test.ShoppingCartNavigationWidgetTest">
+        <methods>
+          <include name="shoppingCartWidgetCheckOutBtn_RedirectToShoppingCartPage_Successfully"/>
+          <include name="shoppingCartWidget_Contains_AddedItems"/>
+          <include name="shoppingCartWidgetItems_CanBeDeleted_Successfully"/>
+          <include name="beforeClass"/>
+          <include name="itemsFromCategorySection_CanBeAddedToCart_Successfully"/>
+          <include name="itemsSearched_CanBeAddedToCart_Successfully"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- com.challenge.test.ShoppingCartNavigationWidgetTest -->
+    </classes>
+  </test> <!-- Apple Safari Browser Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
