@@ -1,5 +1,6 @@
 package com.challenge.test;
 
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
@@ -17,8 +18,14 @@ import org.testng.annotations.BeforeClass;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.Timestamp;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.AssertJUnit;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import com.challenge.pom.CategoryPage;
@@ -18,9 +19,17 @@ import org.testng.annotations.BeforeClass;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.Timestamp;
+import java.time.Instant;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
@@ -29,7 +38,7 @@ public class ShoppingCartNavigationWidgetTest {
 	WebDriver driver;
 	IndexPage indexPage;
 	Map<String,Float> cart;
-
+	
 	@BeforeClass
 	@Parameters({"URL","Browser"})
 	public void beforeClass(String url, String browser) {

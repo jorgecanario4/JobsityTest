@@ -1,10 +1,18 @@
 package com.challenge.pom;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 
 public class Base {
 
@@ -180,4 +189,22 @@ public class Base {
 	public void refreshPage() {
 		driver.navigate().refresh();
 	}
+	
+//	public void scrnCapture() {
+//		File scrnshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//		File scrnshotName = new File("./src/test/resources/"+ driver.getTitle() +"--"+getDate() +".png");
+//		try {
+//			FileUtils.copyFile(scrnshot,scrnshotName);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		Reporter.log("<br><img src='"+scrnshotName+"' /><br>");
+//		
+//	}
+//	
+//	public String getDate() {
+//		DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd-hhmmssS");
+//		Date date = new Date();
+//		return dateFormat.format(date);
+//	}
 }
