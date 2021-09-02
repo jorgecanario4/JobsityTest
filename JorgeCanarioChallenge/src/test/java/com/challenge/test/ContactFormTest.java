@@ -33,7 +33,9 @@ public class ContactFormTest {
 		contactPage.scrollToForm();
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		assertTrue(contactPage.isErrorOnSubmit());	
+		Boolean success = contactPage.isErrorOnSubmit();
+		if(!success) contactPage.scrnCapture();
+		assertTrue(success);	
 		
 	}
 	
@@ -47,7 +49,9 @@ public class ContactFormTest {
 		contactPage.writeTextEmailField("asdf@asf.com");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		assertTrue(contactPage.isErrorOnSubmit());	
+		Boolean success = contactPage.isErrorOnSubmit();
+		if(!success) contactPage.scrnCapture();
+		assertTrue(success);	
 		
 	}
 
@@ -61,7 +65,9 @@ public class ContactFormTest {
 		contactPage.writeTextEmailField("asdf/p[asf.com");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		assertTrue(contactPage.isErrorOnSubmit());	
+		Boolean success = contactPage.isErrorOnSubmit();
+		if(!success) contactPage.scrnCapture();
+		assertTrue(success);
 	}
 	
 	@Test
@@ -73,7 +79,9 @@ public class ContactFormTest {
 		contactPage.writeTextMessageField("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet...");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		assertTrue(contactPage.isErrorOnSubmit());	
+		Boolean success = contactPage.isErrorOnSubmit();
+		if(!success) contactPage.scrnCapture();
+		assertTrue(success);
 	}
 
 	@Test
@@ -84,7 +92,9 @@ public class ContactFormTest {
 		contactPage.writeTextEmailField("asdf/p[asf.com");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		assertTrue(contactPage.isErrorOnSubmit());	
+		Boolean success = contactPage.isErrorOnSubmit();
+		if(!success) contactPage.scrnCapture();
+		assertTrue(success);
 	}
 
 	@Test(priority =1)
@@ -98,7 +108,9 @@ public class ContactFormTest {
 		contactPage.selectFileForAttachmentInput(System.getProperty("user.dir")+"/src/test/resources/TestingFiles/UploadTestFile.txt");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		assertTrue(contactPage.isSuccessOnSubmit());	
+		Boolean success = contactPage.isSuccessOnSubmit();
+		if(!success) contactPage.scrnCapture();
+		assertTrue(success);
 	}
 
 	@AfterClass

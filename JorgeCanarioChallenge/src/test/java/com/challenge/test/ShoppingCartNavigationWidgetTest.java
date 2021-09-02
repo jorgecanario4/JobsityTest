@@ -64,10 +64,17 @@ public class ShoppingCartNavigationWidgetTest {
 	@Test(priority=5 ,enabled = true)
 	public void shoppingCartWidgetCheckOutBtn_RedirectToShoppingCartPage_Successfully() {
 		NavigationHeader navbar = new NavigationHeader(driver);
-		assertTrue(navbar.checkOutFromCartWidget());
-		AssertJUnit.assertEquals(driver.getCurrentUrl(), ShoppingCartPage.PAGE_URL);
+		Boolean success = navbar.checkOutFromCartWidget();
+		assertTrue(success);
+		if(!success) navbar.scrnCapture();
+		success = driver.getCurrentUrl().equals(ShoppingCartPage.PAGE_URL);
+		if(!success) navbar.scrnCapture();
+		assertTrue(success);
 		ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
-		assertTrue(shoppingCartPage.isShoppingCartFormPresent());
+		success = shoppingCartPage.isShoppingCartFormPresent();
+		if(!success) shoppingCartPage.scrnCapture();
+		assertTrue(success);
+		
 	}
 	
 	@Test(priority=4 ,enabled = true)
@@ -76,14 +83,21 @@ public class ShoppingCartNavigationWidgetTest {
 		Integer initialCartItemsQuantity = navbar.getCartItemsQuantity();
 		removeItemsFromCart(navbar.deleteItemFromCartWidget(0));
 		Integer afterAddCartItemsQuantity = navbar.getCartItemsQuantity();
-		AssertJUnit.assertTrue((initialCartItemsQuantity-1)== afterAddCartItemsQuantity);
+		
+		Boolean success = (initialCartItemsQuantity-1)== afterAddCartItemsQuantity;
+		if(!success) navbar.scrnCapture();
+		assertTrue(success);
+		
 	}
 	
 	@Test(priority=3 ,enabled = true)
 	public void shoppingCartWidget_Contains_AddedItems() {
 		NavigationHeader navbar = new NavigationHeader(driver);
 		navbar.refreshPage();
-		AssertJUnit.assertTrue(navbar.getCartItemsMap().equals(cart));
+		
+		Boolean success = navbar.getCartItemsMap().equals(cart);
+		if(!success) navbar.scrnCapture();
+		assertTrue(success);
 		
 	}
 	
@@ -101,7 +115,10 @@ public class ShoppingCartNavigationWidgetTest {
 		searchPage.loadPage();
 		addItemToCart(searchPage.buyResultedItem(addToCartSearchResult));
 		Integer afterAddCartItemsQuantity = navbar.getCartItemsQuantity();
-		AssertJUnit.assertTrue((initialCartItemsQuantity+1)== afterAddCartItemsQuantity);
+		
+		Boolean success = (initialCartItemsQuantity+1)== afterAddCartItemsQuantity;
+		if(!success) searchPage.scrnCapture();
+		assertTrue(success);
 
 	}
 
@@ -115,7 +132,10 @@ public class ShoppingCartNavigationWidgetTest {
 		categoryPage.loadPage();
 		addItemToCart(categoryPage.buyCategoryItem(addToCartCategoryResult));
 		Integer afterAddCartItemsQuantity = navbar.getCartItemsQuantity();
-		AssertJUnit.assertTrue((initialCartItemsQuantity+1)== afterAddCartItemsQuantity);
+		
+		Boolean success = (initialCartItemsQuantity+1) == afterAddCartItemsQuantity;
+		if(!success) categoryPage.scrnCapture();
+		assertTrue(success);	
 
 	}
 

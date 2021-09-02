@@ -190,21 +190,26 @@ public class Base {
 		driver.navigate().refresh();
 	}
 	
-//	public void scrnCapture() {
-//		File scrnshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-//		File scrnshotName = new File("./src/test/resources/"+ driver.getTitle() +"--"+getDate() +".png");
-//		try {
-//			FileUtils.copyFile(scrnshot,scrnshotName);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		Reporter.log("<br><img src='"+scrnshotName+"' /><br>");
-//		
-//	}
-//	
-//	public String getDate() {
-//		DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd-hhmmssS");
-//		Date date = new Date();
-//		return dateFormat.format(date);
-//	}
+	public void scrnCapture() {
+		File scrnshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String fileName = driver.getTitle().replaceAll(" ", "_") +"--"+getDate() ;
+		File scrnshotName = new File("./"+ fileName +".png");
+		try {
+			FileUtils.copyFile(scrnshot,scrnshotName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Reporter.log("<br><img src='"+System.getProperty("user.dir")+"/"+fileName+".png' height='720' width='1000'><br>");
+		
+	}
+	
+	public String getDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd-hhmmssS");
+		Date date = new Date();
+		return dateFormat.format(date);
+	}
+	
+	public void report(String input) {
+		Reporter.log(input);
+	}
 }
