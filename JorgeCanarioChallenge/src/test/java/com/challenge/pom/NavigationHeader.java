@@ -102,6 +102,7 @@ public class NavigationHeader extends Base {
 		report(" Moving mouse over 'close' button and click", DEBUG);
 		moveToElementAndClick(cartItemRemoveBtnLocator);
 		report(" Refreshing Category Page (F5)", DEBUG);
+		waitForToBeClickabe(shoppingCartWidgetLocator);
 		refreshPage();
 		report(" Handing over a map with the deleted item/product's name and price", SUCCESS);
 		return map;
@@ -119,7 +120,7 @@ public class NavigationHeader extends Base {
 			report(" Getting shopping cart widget section with buttons of action", DEBUG);
 			WebElement shoppingCartWidgetSummary = findElement(shoppingCartWidgetSummaryLocator);
 			report(" Awaiting for the 'Check Out' button to be present", DEBUG);
-			waitForPresenceOf(checkOutShoppingWidgetBtnLocator);
+			waitForToBeClickabe(checkOutShoppingWidgetBtnLocator);
 			report(" Getting 'Check Out' button element and click", DEBUG);
 			shoppingCartWidgetSummary.findElement(checkOutShoppingWidgetBtnLocator).click();
 			feedback = true;

@@ -197,6 +197,7 @@ public class Base {
 	}
 
 	public void scrnCapture() {
+		report(" Taking screenshot", DEBUG);
 		File scrnshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String fileName = driver.getTitle().replaceAll(" ", "_") + "--" + getDate();
 		File scrnshotName = new File("./" + fileName + ".png");
