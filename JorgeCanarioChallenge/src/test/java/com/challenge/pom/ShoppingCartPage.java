@@ -16,13 +16,21 @@ public class ShoppingCartPage extends Base{
 	private static By pageContainerLocator = By.cssSelector("div.columns-container");
 	
 	public WebElement getShoppingCartForm() {
-		return findElement(pageContainerLocator).findElement(shoppingCartFormLocator);
+		report("Trying to get shopping cart table element", ACTION);
+		report(" Getting shopping cart table element", DEBUG);
+		WebElement output = findElement(pageContainerLocator).findElement(shoppingCartFormLocator);
+		report(" Handing over shopping cart table element", SUCCESS);
+		return output;
 	}
 
 	public Boolean isShoppingCartFormPresent() {
+		report("Verifying that shopping cart table is visible", ACTION);
 		try {
-			return getShoppingCartForm().isDisplayed();
+			report(" Shopping cart table element was not displayed", SUCCESS);
+			Boolean output = getShoppingCartForm().isDisplayed();
+			return output;
 		} catch (org.openqa.selenium.NoSuchElementException e) {
+			report(" Shopping cart table element was not displayed", ALERT);
 			return false;
 		}
 	}

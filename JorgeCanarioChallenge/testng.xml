@@ -10,7 +10,7 @@
 				<class name="com.challenge.test.ShoppingCartNavigationWidgetTest" />
 			</classes>
 		</test>
-		<test name="Mozilla Firefox Browser Test">
+ 		<test name="Mozilla Firefox Browser Test">
 		<parameter name="Browser" value="Firefox"/>
 			<classes>
 				<class name="com.challenge.test.SearchTest" />
@@ -29,10 +29,10 @@
 		<test name="Apple Safari Browser Test">
 		<parameter name="Browser" value="Safari"/>
 			<classes>
-				<class name="com.challenge.test.SearchTest" /> 
+				<class name="com.challenge.test.SearchTest" />
 				<class name="com.challenge.test.ContactFormTest" />
 				<class name="com.challenge.test.ShoppingCartNavigationWidgetTest" />
 			</classes>
-		</test>
+		</test> 
 		
 </suite> 

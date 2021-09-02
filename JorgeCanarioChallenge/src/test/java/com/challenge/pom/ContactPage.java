@@ -29,67 +29,99 @@ public class ContactPage extends Base {
 	
 	
 	public List<WebElement> getSubjectHeadingDropdownOptions(){
+		report(" Getting 'Subject Heading' dropdown element", DEBUG);
 		WebElement subjectHeadingDropdownList = findElement(subjectHeadingDropdownListLocator);
-		return subjectHeadingDropdownList.findElements(By.tagName("option"));	
+		report(" Getting list with all 'Subject Heading's options element", DEBUG);
+		List<WebElement> output = subjectHeadingDropdownList.findElements(By.tagName("option"));	
+		report(" Handing over all 'Subject Heading's options element", DEBUG);
+		return output;
 	}
 	
 	public String selectSubjectHeading(String input) {
+		report(" Getting 'Subject Heading' dropdown element", DEBUG);
 		WebElement subjectHeadingDropdownList = findElement(subjectHeadingDropdownListLocator);
+		report(" Selecting from 'Subject Heading' option number:", DEBUG);
 		Select subjectHeadingSelection = new Select(subjectHeadingDropdownList);
 		subjectHeadingSelection.selectByVisibleText(input);
-		return getText(subjectHeadingSelection.getFirstSelectedOption());
+		String output = getText(subjectHeadingSelection.getFirstSelectedOption());
+		report(" Handing over the text of the selected option. Text is: " + output, DEBUG);
+		return output;
 		
 	}
 	
 	public void selectFileForAttachmentInput(String inputFile) {
+		report(" Getting the 'Attachment input' element ", DEBUG);
 		WebElement attachmentInput = findElement(attachmentInputLocator);
+		report(" Uploading into 'Attachment input' element: "+ inputFile, DEBUG);
 		attachmentInput.sendKeys(inputFile);
 	}
 
 	public void submitContactForm() {
+		report(" Clicking 'Submit' Button", DEBUG);
 		findElement(submitBtnLocator).click();
 	}
 
 	public void scrollToForm() {
+		report(" Getting Contact page element from the Contact page's container.", DEBUG);
 		WebElement page = findElement(pageContainerLocator);
+		report(" Getting Contact's form from the Contact page", DEBUG);
 		WebElement form = page.findElement(contactFormLocator);
+		report(" Scrolling until Contact's form becomes visible", DEBUG);
 		scrollToElementBottom(form);
 	}
 	
 	public void loadPage() {
+		report(" Awaiting for the container with all elements of contact page to present", DEBUG);
 		By containerWithAllElementsLocator = By.cssSelector("div#center_column");
 		try {
 			waitForPresenceOf(containerWithAllElementsLocator);
 		} catch (TimeoutException e) {
+			report(" Container with page's element wasn't present after the wait", ALERT);
 			e.printStackTrace();
 		}
 	}
 	
 	public void writeTextMessageField(String input) {
+		report(" Writing in 'Message' inputText: " + input, DEBUG);
 		findElement(messageTextAreaLocator).sendKeys(input);
 	}
 	
 	public void writeTextEmailField(String input) {
+		report(" Writing in 'Email' inputText: " + input, DEBUG);
 		findElement(emailInputTextLocator).sendKeys(input);
 	}
 	
 	public void writeTextOrderField(String input) {
+		report(" Writing in 'Order' inputText: " + input, DEBUG);
 		findElement(orderInputTextLocator).sendKeys(input);
 	}
 	
 	public Boolean isErrorOnSubmit() {
+		report("Verifying if banner with unsuccessful message is displayed", ACTION);
+		report(" Checking if the banner with unsuccessful message is present", DEBUG);
 		waitForPresenceOf(alertSubmitErrorLocator);
+		report(" Getting Contact page element from the Contact page's container.", DEBUG);
 		WebElement page = findElement(pageContainerLocator);
-		return page.findElement(alertSubmitErrorLocator).isDisplayed();
+		report(" Checking if banner with unsuccessful message is an element of the page and is displayed", DEBUG);
+		Boolean output = page.findElement(alertSubmitErrorLocator).isDisplayed();
+		report(" Handing over result of the check. Result: " + output, SUCCESS);
+		return output;
 	}
 	
 	public Boolean isSuccessOnSubmit() {
+		report("Verifying if banner with successful message is displayed", ACTION);
+		report(" Checking if the banner with successful message is present", DEBUG);
 		waitForPresenceOf(alertSubmitSuccessLocator);
+		report(" Getting Contact page element from the Contact page's container.", DEBUG);
 		WebElement page = findElement(pageContainerLocator);
-		return page.findElement(alertSubmitSuccessLocator).isDisplayed();
+		report(" Checking if banner with successful message is an element of the page and is displayed", DEBUG);
+		Boolean output = page.findElement(alertSubmitSuccessLocator).isDisplayed();
+		report(" Handing over result of the check. Result: " + output, SUCCESS);
+		return output;
 	}
 	
 	public void visitPage() {
+		report(" Navigating diretcly to Contact page: "+ PAGE_URL, DEBUG);
 		get(PAGE_URL);
 	}
 }

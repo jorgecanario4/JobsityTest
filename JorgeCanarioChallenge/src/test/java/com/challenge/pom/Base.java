@@ -29,6 +29,12 @@ public class Base {
 
 	private WebDriver driver;
 
+	public static final int ACTION = 1;
+	public static final int DEBUG = 2;
+	public static final int ALERT = 3;
+	public static final int FAILURE = 4;
+	public static final int SUCCESS = 5;
+
 	public Base(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -155,7 +161,7 @@ public class Base {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 	}
-	
+
 	public void waitForToBeClickabe(By locator) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -189,27 +195,37 @@ public class Base {
 	public void refreshPage() {
 		driver.navigate().refresh();
 	}
-	
+
 	public void scrnCapture() {
 		File scrnshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String fileName = driver.getTitle().replaceAll(" ", "_") +"--"+getDate() ;
-		File scrnshotName = new File("./"+ fileName +".png");
+		String fileName = driver.getTitle().replaceAll(" ", "_") + "--" + getDate();
+		File scrnshotName = new File("./" + fileName + ".png");
 		try {
-			FileUtils.copyFile(scrnshot,scrnshotName);
+			FileUtils.copyFile(scrnshot, scrnshotName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Reporter.log("<br><img src='"+System.getProperty("user.dir")+"/"+fileName+".png' height='720' width='1000'><br>");
-		
+		Reporter.log("<br><img src='" + System.getProperty("user.dir") + "/" + fileName
+				+ ".png' height='720' width='1000'><br>");
+
 	}
-	
+
 	public String getDate() {
 		DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd-hhmmssS");
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
-	
-	public void report(String input) {
-		Reporter.log(input);
+
+	public void report(String input, int notificationType) {
+		String notificationHeader = "";
+
+		switch (notificationType) {
+		case DEBUG: notificationHeader = "DEBUG  : "; break;
+		case ALERT: notificationHeader = "ALERT  : "; break;
+		case ACTION: notificationHeader = "ACTION  : "; break;
+		case FAILURE: notificationHeader = "FAILURE : "; break;
+		case SUCCESS: notificationHeader = "SUCCESS: "; break;
+		}
+		Reporter.log("[" + getDate() + "] "+ notificationHeader + input);
 	}
 }

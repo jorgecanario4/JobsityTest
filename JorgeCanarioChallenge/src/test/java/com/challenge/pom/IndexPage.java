@@ -21,11 +21,17 @@ public class IndexPage extends Base {
 	private static By pageContainerLocator = By.cssSelector("div.columns-container");
 	
 	public List<WebElement> getPopularItems() {
+		report("Trying to get a list of of items/products in popular section", ACTION);
+		report(" Awaiting for the Index page container to load", DEBUG);
 		waitForPresenceOf(pageContainerLocator);
+		report(" Getting the page container", DEBUG);
 		WebElement page = findElement(pageContainerLocator);
+		report(" Getting the container with resulting items/products from popular section", DEBUG);
 		WebElement popularItemsContainer = page.findElement(popularSectionLocator);
-		return popularItemsContainer.findElements(itemNameLocator);
-		
+		report(" Getting a list of items/product in popular section", DEBUG);
+		List<WebElement> output = popularItemsContainer.findElements(itemNameLocator);
+		report(" Handing over a list of items/products in popular section", SUCCESS);
+		return output;
 	}
 
 	public By getAddToCartAJAXBtnLocator() {
@@ -37,6 +43,8 @@ public class IndexPage extends Base {
 	}
 
 	public void visitPage() {
+		String featureName = "<URL>";
+		report(featureName + " Navigating diretcly to Index page: "+ PAGE_URL, DEBUG);
 		get(PAGE_URL);
 	}
 	
