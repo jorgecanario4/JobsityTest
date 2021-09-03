@@ -207,7 +207,8 @@ public class Base {
 			e.printStackTrace();
 		}
 		Reporter.log("<br><img src='" + System.getProperty("user.dir") + "/" + fileName
-				+ ".png' height='720' width='1000'><br>");
+				+ ".png' height='420' width='720'><br>");
+		
 
 	}
 

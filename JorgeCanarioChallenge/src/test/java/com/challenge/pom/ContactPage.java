@@ -52,7 +52,7 @@ public class ContactPage extends Base {
 	public void selectFileForAttachmentInput(String inputFile) {
 		report(" Getting the 'Attachment input' element ", DEBUG);
 		WebElement attachmentInput = findElement(attachmentInputLocator);
-		report(" Uploading into 'Attachment input' element: "+ inputFile, DEBUG);
+		report(" Uploading into 'Attachment input' element: \n"+ inputFile, DEBUG);
 		attachmentInput.sendKeys(inputFile);
 	}
 
