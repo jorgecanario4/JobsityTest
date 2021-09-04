@@ -104,16 +104,16 @@ public class ShoppingCartNavigationWidgetTest {
 	
 
 	@Test(priority=2 ,enabled = true)
-	public void itemsSearched_CanBeAddedToCart_Successfully() {
+	public void SearchedItems_CanBeAddedToCart_Successfully() {
 		String searchItem = "Blouse";
-		Integer addToCartSearchResult = 0;
+		Integer searchResult = 0;
 		indexPage.visitPage();
 		NavigationHeader navbar = new NavigationHeader(driver);
 		Integer initialCartItemsQuantity = navbar.getCartItemsQuantity();
 		indexPage.clearTypeAndSubmit(searchItem, NavigationHeader.searchBoxLocator);
 		SearchPage searchPage = new SearchPage(driver);
 		searchPage.loadPage();
-		addItemToCart(searchPage.buyResultedItem(addToCartSearchResult));
+		addItemToCart(searchPage.buyResultedItem(searchResult));
 		Integer afterAddCartItemsQuantity = navbar.getCartItemsQuantity();
 		
 		Boolean success = (initialCartItemsQuantity+1)== afterAddCartItemsQuantity;
@@ -124,13 +124,13 @@ public class ShoppingCartNavigationWidgetTest {
 
 	@Test(priority =1, enabled = true)
 	public void itemsFromCategorySection_CanBeAddedToCart_Successfully() {
-		Integer addToCartCategoryResult = 0;
+		Integer categoryResult = 0;
 		NavigationHeader navbar = new NavigationHeader(driver);
 		Integer initialCartItemsQuantity = navbar.getCartItemsQuantity();
 		navbar.navigateToWomenCategorySection();
 		CategoryPage categoryPage = new CategoryPage(driver);
 		categoryPage.loadPage();
-		addItemToCart(categoryPage.buyCategoryItem(addToCartCategoryResult));
+		addItemToCart(categoryPage.buyCategoryItem(categoryResult));
 		Integer afterAddCartItemsQuantity = navbar.getCartItemsQuantity();
 		
 		Boolean success = (initialCartItemsQuantity+1) == afterAddCartItemsQuantity;

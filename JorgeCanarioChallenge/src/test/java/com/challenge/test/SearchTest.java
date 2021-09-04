@@ -46,7 +46,7 @@ public class SearchTest {
 	
 
 	@Test(dataProvider = "existingProducts", priority = 2)
-	public void search_ExistingProduct_ShowResult(String input) {
+	public void aSearchFor_ExistingProduct_ShowResult(String input) {
 			indexPage.clearTypeAndSubmit(input, NavigationHeader.searchBoxLocator);
 			SearchPage searchPage = new SearchPage(driver);
 			searchPage.loadPage();
@@ -72,7 +72,7 @@ public class SearchTest {
 
 	
 	@Test(dataProvider = "unexistingProducts", priority = 1 )
-	public void search_unexistingProduct_ShowNoResult(String input) {
+	public void aSearchFor_UnexistingProduct_ShowNoResult(String input) {
 			indexPage.clearTypeAndSubmit(input, NavigationHeader.searchBoxLocator);
 			SearchPage searchPage = new SearchPage(driver);
 			searchPage.loadPage();

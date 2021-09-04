@@ -28,7 +28,7 @@ public class ContactFormTest {
 	}
 
 	@Test
-	public void pageValidates_AllFormsFields_CannotBeBlank() {
+	public void contactPage_ValidatesAllFields_CannotBeSubmittedBlank() {
 		contactPage.visitPage();
 		contactPage.scrollToForm();
 		contactPage.submitContactForm();
@@ -41,7 +41,7 @@ public class ContactFormTest {
 	
 
 	@Test
-	public void pageValidates_FormFieldMessage_CannotBeBlank() {
+	public void contactPage_ValidatesMessageField_CannotBeSubmittedBlank() {
 		contactPage.visitPage();
 		contactPage.scrollToForm();
 		String dropdownSelection = contactPage.getSubjectHeadingDropdownOptions().get(1).getText();
@@ -56,13 +56,12 @@ public class ContactFormTest {
 	}
 
 	@Test
-	public void pageValidates_FormFieldEmail_CannotBeBlank() {
+	public void contactPage_ValidatesEmailField_CannotBeSubmittedBlank() {
 		contactPage.visitPage();
 		contactPage.scrollToForm();
 		String dropdownSelection = contactPage.getSubjectHeadingDropdownOptions().get(1).getText();
 		contactPage.selectSubjectHeading(dropdownSelection);
 		contactPage.writeTextMessageField("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet...");
-		contactPage.writeTextEmailField("asdf/p[asf.com");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
 		Boolean success = contactPage.isErrorOnSubmit();
@@ -71,23 +70,11 @@ public class ContactFormTest {
 	}
 	
 	@Test
-	public void pageValidates_FormFieldEmail_MustFollowRightFormat() {
+	public void contactPage_ValidatesEmailField_FollowCorrectFormatBeforeSubmit() {
 		contactPage.visitPage();
 		contactPage.scrollToForm();
 		String dropdownSelection = contactPage.getSubjectHeadingDropdownOptions().get(1).getText();
 		contactPage.selectSubjectHeading(dropdownSelection);
-		contactPage.writeTextMessageField("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet...");
-		contactPage.submitContactForm();
-		contactPage.loadPage();
-		Boolean success = contactPage.isErrorOnSubmit();
-		if(!success) contactPage.scrnCapture();
-		assertTrue(success);
-	}
-
-	@Test
-	public void pageValidates_FormFieldSubject_CannotBeBlank() {
-		contactPage.visitPage();
-		contactPage.scrollToForm();
 		contactPage.writeTextMessageField("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet...");
 		contactPage.writeTextEmailField("asdf/p[asf.com");
 		contactPage.submitContactForm();
@@ -97,8 +84,21 @@ public class ContactFormTest {
 		assertTrue(success);
 	}
 
+	@Test
+	public void contactPage_ValidatesSubjectField_CannotBeSubmittedBlank() {
+		contactPage.visitPage();
+		contactPage.scrollToForm();
+		contactPage.writeTextMessageField("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet...");
+		contactPage.writeTextEmailField("asdf@pasf.com");
+		contactPage.submitContactForm();
+		contactPage.loadPage();
+		Boolean success = contactPage.isErrorOnSubmit();
+		if(!success) contactPage.scrnCapture();
+		assertTrue(success);
+	}
+
 	@Test(priority =1)
-	public void messageAttachment_CanBeSentInForm_Successfully() {
+	public void contactPage_AllowMessagesWithAttachment_ToBeSubmittedSuccessfully() {
 		contactPage.visitPage();
 		contactPage.scrollToForm();
 		contactPage.writeTextMessageField("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet...");
