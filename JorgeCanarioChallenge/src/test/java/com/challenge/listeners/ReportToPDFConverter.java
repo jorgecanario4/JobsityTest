@@ -96,6 +96,8 @@ public class ReportToPDFConverter implements IExecutionListener {
 
 		deleteFilesWithExtension(currentProjectDir, ".png");
 		deleteFilesWithExtension(reportDir, ".pdf");
+		
+		deleteFilesWithExtension(currentProjectDir, ".jpg");
 	}
 
 	/**

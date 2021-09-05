@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,6 +26,10 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
+
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 
 /**
@@ -403,6 +409,7 @@ public class Base {
 	 * 
 	 * @param input	refers to the text that will be logged
 	 * @param notificationType refers to the classification of the log: DEBUG, ALERT, ACTION, FAILURE, SUCCESS
+	 * @author Jorge Canario
 	 */
 	public void report(String input, int notificationType) {
 		String notificationHeader = "";
@@ -415,5 +422,20 @@ public class Base {
 		case SUCCESS: notificationHeader = "SUCCESS: "; break;
 		}
 		Reporter.log("[" + getDate() + "] "+ notificationHeader + input);
+	}
+	
+	/**
+	 * This method takes a full DOM with viewport more than 1200px of the page and save it in the project directory 
+	 * as 'pixelPerfectviewport1200pxCmpImg.jpg'
+	 * 
+	 * @author Jorge Canario
+	 */
+	public void takeFullDOMScrnshot() {
+		Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1200)).takeScreenshot(driver);
+        try {
+            ImageIO.write(screenshot.getImage(),"JPG",new File(System.getProperty("user.dir")+"/pixelPerfectviewport1200pxCmpImg.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }
