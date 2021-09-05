@@ -19,14 +19,32 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 
+/**
+ * This class prepares the outcome of the test suite in a way that can be read by the people that needs to read it
+ * 
+ * @author Jorge Canario
+ *
+ */
 public class ReportToPDFConverter implements IExecutionListener {
 
+	/**
+	 * This method gets the current date and formats it as follows: yy-MM-dd-hhmmssS
+	 * @return a string with the current date in the following format: yy-MM-dd-hhmmssS
+	 * @author Jorge Canario
+	 */
 	public String getDate() {
 		DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd-hhmmssS");
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
 
+	/**
+	 * This method transform a html file into a A4 page PDF format
+	 * 
+	 * @param htmlFileName a String specifying the path of the html file (its absolute name)
+	 * @param pdfFileName a String specifying the path of the pdf file to create (its absolute name)
+	 * @author Jorge Canario
+	 */
 	private void convertHTMLFileToA4PDF(String htmlFileName, String pdfFileName) {
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		PdfDocument pdfDocument = new PdfDocument(new PdfWriter(outStream));
@@ -50,6 +68,12 @@ public class ReportToPDFConverter implements IExecutionListener {
 
 	}
 
+	/**
+	 * This method deletes files with certain extension at the end of the name of the file from certain location
+	 * @param input the directory from where the files wants to be deleted
+	 * @param extension a String specifying the extension ending of the files that wants to be deleted
+	 * @author Jorge Canario
+	 */
 	public void deleteFilesWithExtension(File input, String extension) {
 		if (input.exists()) {
 			for (File file : input.listFiles()) {
@@ -61,6 +85,10 @@ public class ReportToPDFConverter implements IExecutionListener {
 		}
 	}
 	
+	/**
+	 * This method deletes the resulted files used in previous run of the code 
+	 * @author Jorge Canario
+	 */
 	public void deletePreviousRunFiles() {
 
 		File currentProjectDir = new File(System.getProperty("user.dir"));
@@ -70,10 +98,20 @@ public class ReportToPDFConverter implements IExecutionListener {
 		deleteFilesWithExtension(reportDir, ".pdf");
 	}
 
+	/**
+	 * This method run before the execution of the suite. Here the previous run files are deleted before the start of the next 
+	 * execution
+	 * @author Jorge Canario
+	 */
 	public void onExecutionStart() {
 		deletePreviousRunFiles();
 	}
 
+	/**
+	 * This method run after the suite has been ran completed and reports have been created. Here the report is converted to PDF and stored in the same 
+	 * path that the html was saved
+	 * @author Jorge Canario
+	 */
 	public void onExecutionFinish() {
 		String htmlInputFile = System.getProperty("user.dir") + "/test-output/emailable-report.html";
 		String pdfOutputFile = System.getProperty("user.dir") + "/test-output/emailable-report-" + getDate() + ".pdf";

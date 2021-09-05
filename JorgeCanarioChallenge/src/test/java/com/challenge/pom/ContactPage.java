@@ -8,8 +8,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+/**
+ * This class extends the Base wrapper class and serves the same purpose, having this class it won't be necessary to modify the test in case something happens with 
+ * current way to perform action.
+ * 
+ * Also, this class main purpose is to wrap all possible actions that can be performed in the contact page
+ * 
+ * @author Jorge Canario
+ *
+ */
 public class ContactPage extends Base {
+	
 
+	/**
+	 * Is the direct URL of the page: {@value}
+	 */
 	public static final String PAGE_URL="http://automationpractice.com/index.php?controller=contact";
 	
 	private static By contactFormLocator = By.cssSelector("form.contact-form-box");
@@ -23,11 +36,22 @@ public class ContactPage extends Base {
 	private static By alertSubmitErrorLocator = By.cssSelector("div.alert.alert-danger");
 	private static By alertSubmitSuccessLocator = By.cssSelector("p.alert.alert-success");
 
+	/**
+	 * Constructor class to instantiate.
+	 * 
+	 * @param driver refers to the driver that will be performing actions. This class perform actions over a instance of a browser, that instance of the browser can be thought as the driver.
+	 * @author Jorge Canario
+	 */
 	public ContactPage(WebDriver driver) {
 		super(driver);
 	}
 	
 	
+	/**
+	 * This method returns all the options that the "Subject Heading"'s dropdown list has
+	 * @return a list of web elements for each of the options the dropdown list has
+	 * @author Jorge Canario
+	 */
 	public List<WebElement> getSubjectHeadingDropdownOptions(){
 		report(" Getting 'Subject Heading' dropdown element", DEBUG);
 		WebElement subjectHeadingDropdownList = findElement(subjectHeadingDropdownListLocator);
@@ -37,6 +61,12 @@ public class ContactPage extends Base {
 		return output;
 	}
 	
+	/**
+	 * This method selects the option, by its ordinal number of appearance, to select for "Subject Heading"
+	 * @param input the ordinal number option to select
+	 * @return a Strign with the option selected
+	 * @author Jorge Canario
+	 */
 	public String selectSubjectHeading(String input) {
 		report(" Getting 'Subject Heading' dropdown element", DEBUG);
 		WebElement subjectHeadingDropdownList = findElement(subjectHeadingDropdownListLocator);
@@ -49,6 +79,11 @@ public class ContactPage extends Base {
 		
 	}
 	
+	/**
+	 * This methods allow to upload a file into the attachment input of the contact page form
+	 * @param inputFile a String specifying the absolute location of the file to be uploaded 
+	 * @author Jorge Canario
+	 */
 	public void selectFileForAttachmentInput(String inputFile) {
 		report(" Getting the 'Attachment input' element ", DEBUG);
 		WebElement attachmentInput = findElement(attachmentInputLocator);
@@ -56,11 +91,20 @@ public class ContactPage extends Base {
 		attachmentInput.sendKeys(inputFile);
 	}
 
+	/**
+	 * This method clicks on the 'Send' button
+	 * @author Jorge Canario
+	 */
 	public void submitContactForm() {
 		report(" Clicking 'Submit' Button", DEBUG);
 		findElement(submitBtnLocator).click();
 	}
 
+	/**
+	 * This method scroll to a point where the whole form is visible, allowing driver to perform action
+	 * cause on it as if page loaded correctly, elements would be visible
+	 * @author Jorge Canario
+	 */
 	public void scrollToForm() {
 		report(" Getting Contact page element from the Contact page's container.", DEBUG);
 		WebElement page = findElement(pageContainerLocator);
@@ -70,6 +114,10 @@ public class ContactPage extends Base {
 		scrollToElementBottom(form);
 	}
 	
+	/**
+	 *  This method makes the driver wait until the container with all elements (not includind footer and navigation bar) loads correctly
+	 * @author Jorge Canario
+	 */
 	public void loadPage() {
 		report(" Awaiting for the container with all elements of contact page to present", DEBUG);
 		By containerWithAllElementsLocator = By.cssSelector("div#center_column");
@@ -81,21 +129,41 @@ public class ContactPage extends Base {
 		}
 	}
 	
+	/**
+	 * This method writes the text provided in the "Message" inputText on the contact page's form
+	 * @param input the text to write in the inputText
+	 * @author Jorge Canario
+	 */
 	public void writeTextMessageField(String input) {
 		report(" Writing in 'Message' inputText: " + input, DEBUG);
 		findElement(messageTextAreaLocator).sendKeys(input);
 	}
 	
+	/**
+	 * This method writes the text provided in the "Email" inputText on the contact page's form
+	 * @param input text to be written in the "Email" inputText 
+	 * @author Jorge Canario
+	 */
 	public void writeTextEmailField(String input) {
 		report(" Writing in 'Email' inputText: " + input, DEBUG);
 		findElement(emailInputTextLocator).sendKeys(input);
 	}
 	
+	/**
+	 * This method writes the text provided in the "Order" inputText on the contact page's form
+	 * @param input text to be written in the "Order" inputText 
+	 * @author Jorge Canario
+	 */
 	public void writeTextOrderField(String input) {
 		report(" Writing in 'Order' inputText: " + input, DEBUG);
 		findElement(orderInputTextLocator).sendKeys(input);
 	}
 	
+	/**
+	 * This method confirms if the contact form generated an error after submitting the data
+	 * @return a boolean value confirming if the contact form generate an error with the data submitted
+	 * @author Jorge Canario
+	 */
 	public Boolean isErrorOnSubmit() {
 		report("Verifying if banner with unsuccessful message is displayed", ACTION);
 		report(" Checking if the banner with unsuccessful message is present", DEBUG);
@@ -108,6 +176,13 @@ public class ContactPage extends Base {
 		return output;
 	}
 	
+	/**
+	 * 
+	 * This method confirms if the contact form was successfully submitted
+	 * 
+	 * @return a boolean value confirming if the contact form's data was submitted successfully
+	 * @author Jorge Canario
+	 */
 	public Boolean isSuccessOnSubmit() {
 		report("Verifying if banner with successful message is displayed", ACTION);
 		report(" Checking if the banner with successful message is present", DEBUG);
@@ -120,6 +195,10 @@ public class ContactPage extends Base {
 		return output;
 	}
 	
+	/**
+	 * This methods navigate to contact page directly by changing the URL on the browser
+	 * @author Jorge Canario
+	 */
 	public void visitPage() {
 		report(" Navigating diretcly to Contact page: "+ PAGE_URL, DEBUG);
 		get(PAGE_URL);
