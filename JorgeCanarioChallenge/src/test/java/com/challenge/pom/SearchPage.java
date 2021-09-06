@@ -140,12 +140,9 @@ public class SearchPage extends Base {
 	public Integer getResultAmount() {
 		report("Getting the amount of item/products returned by the search", ACTION);
 		report(" Getting search result counter text", DEBUG);
-		String textAmountOfResult = findElement(numberOfResultsLocator).getText().trim();
-		report(" Extracting the number", DEBUG);
-		Pattern pattern = Pattern.compile("^([1-9])+");
-		Matcher matcher = pattern.matcher(textAmountOfResult);
+		String textAmountOfResult = findElement(numberOfResultsLocator).getText().replaceAll("[^\\d]+(\\.*\\S)+", "");
 		report(" Handing over the amount of item/products returned by the search", SUCCESS);
-		return Integer.valueOf(matcher.group(1));
+		return Integer.valueOf(textAmountOfResult);
 	}
 
 	/**

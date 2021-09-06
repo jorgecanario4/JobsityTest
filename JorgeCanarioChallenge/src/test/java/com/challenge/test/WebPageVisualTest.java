@@ -61,8 +61,10 @@ public class WebPageVisualTest {
 	public void indexPage_IsAPixelPerfect_DesignedPage() {
 		  indexPage.takeFullDOMScrnshot();
           
+		  indexPage.report("To see difference, if any, visit: https://eyes.applitools.com/app/test-results/00000251771339192780?accountId=tx5voHA9AkKs_CIHBl8Iew~~&display=details&top=00000251771339192780%283%29", IndexPage.DEBUG);
+		  
           Eyes eyes = new Eyes();
-          eyes.setApiKey("YjnFqNehl106WAYcxdx3mBwWX7C5xrBXw776trf8UFRO8110");
+          eyes.setApiKey("AA9zfpqPaiRw2JMvgCLHi3bRbxo34mL98Rh9fioF1gdc110");
           
           try {
               eyes.open("Jobsity Challenge - Item #2", "Jobsity Challenge - Pixel Perfect Validation", new RectangleSize(1200, 600));
@@ -75,7 +77,7 @@ public class WebPageVisualTest {
           } finally {
               eyes.abortIfNotClosed();
           }  
-          
+                  
 	}
 
 	/**

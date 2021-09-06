@@ -15,6 +15,9 @@ import static org.testng.Assert.assertTrue;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * This class isolates the contact form tests
  * @author Jorge Canario
@@ -48,7 +51,8 @@ public class ContactFormTest {
 		contactPage.scrollToForm();
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		Boolean success = contactPage.isErrorOnSubmit();
+		Boolean success = contactPage.isErrorOnSubmit() && contactPage.verifyAlertBannerContent(new ArrayList<String>(
+			    Arrays.asList("There is 3 error", "Invalid email address.", "The message cannot be blank.", "Please select a subject from the list provided.")));
 		if(!success) contactPage.scrnCapture();
 		assertTrue(success);	
 		
@@ -68,7 +72,8 @@ public class ContactFormTest {
 		contactPage.writeTextEmailField("asdf@asf.com");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		Boolean success = contactPage.isErrorOnSubmit();
+		Boolean success = contactPage.isErrorOnSubmit() && contactPage.verifyAlertBannerContent(new ArrayList<String>(
+			    Arrays.asList("There is 1 error", "The message cannot be blank.")));
 		if(!success) contactPage.scrnCapture();
 		assertTrue(success);	
 		
@@ -87,7 +92,8 @@ public class ContactFormTest {
 		contactPage.writeTextMessageField("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet...");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		Boolean success = contactPage.isErrorOnSubmit();
+		Boolean success = contactPage.isErrorOnSubmit() && contactPage.verifyAlertBannerContent(new ArrayList<String>(
+			    Arrays.asList("There is 1 error", "Invalid email address.")));
 		if(!success) contactPage.scrnCapture();
 		assertTrue(success);
 	}
@@ -106,7 +112,8 @@ public class ContactFormTest {
 		contactPage.writeTextEmailField("asdf/p[asf.com");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		Boolean success = contactPage.isErrorOnSubmit();
+		Boolean success = contactPage.isErrorOnSubmit() && contactPage.verifyAlertBannerContent(new ArrayList<String>(
+			    Arrays.asList("There is 1 error", "Invalid email address.")));
 		if(!success) contactPage.scrnCapture();
 		assertTrue(success);
 	}
@@ -123,7 +130,8 @@ public class ContactFormTest {
 		contactPage.writeTextEmailField("asdf@pasf.com");
 		contactPage.submitContactForm();
 		contactPage.loadPage();
-		Boolean success = contactPage.isErrorOnSubmit();
+		Boolean success = contactPage.isErrorOnSubmit() && contactPage.verifyAlertBannerContent(new ArrayList<String>(
+			    Arrays.asList("There is 1 error", "Please select a subject from the list provided.")));
 		if(!success) contactPage.scrnCapture();
 		assertTrue(success);
 	}

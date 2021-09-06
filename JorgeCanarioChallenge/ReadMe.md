@@ -6,7 +6,7 @@ Once installed no configuration is needed.
 
 ### Installation instructions:
 
-To run this code, the followings need to be installed depending on your operative system.
+To run this code, the following need to be installed depending on your operative system.
 
 - Java:
 	- [Windows](https://java.com/en/download/help/windows_manual_download.xml)
@@ -27,8 +27,8 @@ To run this code, the followings need to be installed depending on your operativ
 
 - Download only if your OS is MacOS: [Apple Safari](https://support.apple.com/en-us/HT204416) **(OPTIONAL)**
 
-> **Note:** there is a Safari for Windows but I wouldn't recommend as Apple officially is not supporting Safari for Windows. If you find some web that offers
-> Safari for Windows, there's a high risk of downloading spyware, ransomwares, worm and trojans. We're better off running with other browsers (no worries code will not break because of missing a browser)
+> **Note:** there is a Safari for Windows but I wouldn't recommend it as Apple officially is not supporting Safari for Windows. If you find some web that offers
+> Safari for Windows, there's a high risk of downloading spyware, ransomwares, worms and trojans. We're better off running with other browsers (no worries code will not break because of missing a browser)
 
 
 ### Operating instructions:
@@ -51,6 +51,7 @@ Once executed, you can find report:
 - **Test Run Report HTML** as `emailable-report.html` in: `./target/surefire-reports/`
 - **Test Run Report PDF** as `emailable-report-<current date in following format: yy-MM-dd-hhmmssS >.pdf` in: `./target/surefire-reports/`
 - **Test Run Report Interface** as `index.html` in: `./target/surefire-reports/`
+- **Visual AI Test: See Differences** (when prompted, log in with following credentials: donpmgd@gmail.com/donPmgd!1) in : [Applitools Challenge Visual Compare Page](https://eyes.applitools.com/app/test-results/00000251771339192780?accountId=tx5voHA9AkKs_CIHBl8Iew~~&display=details&top=00000251771339192780%283%29)
 
 
 ### A file manifest (list of files included):

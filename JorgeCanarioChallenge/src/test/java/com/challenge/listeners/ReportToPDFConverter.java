@@ -92,7 +92,7 @@ public class ReportToPDFConverter implements IExecutionListener {
 	public void deletePreviousRunFiles() {
 
 		File currentProjectDir = new File(System.getProperty("user.dir"));
-		File reportDir = new File(System.getProperty("user.dir") + "/test-output");
+		File reportDir = new File(System.getProperty("user.dir") + "/target/surefire-reports");
 
 		deleteFilesWithExtension(currentProjectDir, ".png");
 		deleteFilesWithExtension(reportDir, ".pdf");
@@ -115,8 +115,8 @@ public class ReportToPDFConverter implements IExecutionListener {
 	 * @author Jorge Canario
 	 */
 	public void onExecutionFinish() {
-		String htmlInputFile = System.getProperty("user.dir") + "/test-output/emailable-report.html";
-		String pdfOutputFile = System.getProperty("user.dir") + "/test-output/emailable-report-" + getDate() + ".pdf";
+		String htmlInputFile = System.getProperty("user.dir") + "/target/surefire-reports/emailable-report.html";
+		String pdfOutputFile = System.getProperty("user.dir") + "/target/surefire-reports/emailable-report-" + getDate() + ".pdf";
 		convertHTMLFileToA4PDF(htmlInputFile, pdfOutputFile);
 		System.out.print("New PDF file created: " + pdfOutputFile);
 	}

@@ -66,7 +66,7 @@ public class SearchTest {
 			indexPage.clearTypeAndSubmit(input, NavigationHeader.searchBoxLocator);
 			SearchPage searchPage = new SearchPage(driver);
 			searchPage.loadPage();
-			Boolean success = searchPage.isResults();
+			Boolean success = searchPage.isResults() && (searchPage.getResultAmount() > 0);
 			if(!success) searchPage.scrnCapture();
 			assertTrue(success);
 
@@ -105,9 +105,9 @@ public class SearchTest {
 			indexPage.clearTypeAndSubmit(input, NavigationHeader.searchBoxLocator);
 			SearchPage searchPage = new SearchPage(driver);
 			searchPage.loadPage();
-			Boolean success = searchPage.isResults();
-			if(success) searchPage.scrnCapture();
-			assertFalse(success);
+			Boolean success = !searchPage.isResults() && (searchPage.getResultAmount() == 0);
+			if(!success) searchPage.scrnCapture();
+			assertTrue(success);
 
 	}
 	
