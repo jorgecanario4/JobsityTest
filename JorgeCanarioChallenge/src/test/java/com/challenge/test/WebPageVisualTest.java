@@ -66,6 +66,7 @@ public class WebPageVisualTest {
           
           try {
               eyes.open("Jobsity Challenge - Item #2", "Jobsity Challenge - Pixel Perfect Validation", new RectangleSize(1200, 600));
+//              BufferedImage img = ImageIO.read(new File(System.getProperty("user.dir")+"/src/test/resources/References/indexPagePixelPerfectBaseline.jpg"));
               BufferedImage img = ImageIO.read(new File(System.getProperty("user.dir")+"/pixelPerfectviewport1200pxCmpImg.jpg"));
               eyes.check("Image buffer", Target.image(img));
               eyes.close();
