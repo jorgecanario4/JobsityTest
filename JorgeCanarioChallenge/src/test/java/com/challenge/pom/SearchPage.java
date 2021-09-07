@@ -140,7 +140,7 @@ public class SearchPage extends Base {
 	public Integer getResultAmount() {
 		report("Getting the amount of item/products returned by the search", ACTION);
 		report(" Getting search result counter text", DEBUG);
-		String textAmountOfResult = findElement(numberOfResultsLocator).getText().replaceAll("[^\\d]+(\\.*\\S)+", "");
+		String textAmountOfResult = findElement(numberOfResultsLocator).getAttribute("outerHTML").replaceAll("(<span class=\"heading-counter\">)|(</span>)", "").trim().replaceAll("[^\\d]+(\\.*\\S)+", "");
 		report(" Handing over the amount of item/products returned by the search", SUCCESS);
 		return Integer.valueOf(textAmountOfResult);
 	}

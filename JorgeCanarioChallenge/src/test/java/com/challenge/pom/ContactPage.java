@@ -246,7 +246,7 @@ public class ContactPage extends Base {
 		String bannerTitle = alertSubmitErrorBanner.findElement(By.tagName("p")).getText().trim();
 		
 		if (bannerTitle.equalsIgnoreCase(inputs.get(0))) {
-			report(" Banner title matches the expected "+ bannerTitle, DEBUG);
+			report(" Banner title matches the expected: "+ bannerTitle, DEBUG);
 			inputs.remove(0);
 			
 			try {
@@ -254,8 +254,8 @@ public class ContactPage extends Base {
 
 				if (bannerIssues.size() == inputs.size()) {
 					for (WebElement issue : bannerIssues) {
-						for (int i = 0; i < inputs.size(); i++) {
-							if(issue.getText().equalsIgnoreCase(inputs.get(i))) {
+						for (int i = 0; i < inputs.size(); i++) { 
+							if(issue.getAttribute("outerHTML").replaceAll("(<li>)|(</li>)", "").trim().equalsIgnoreCase(inputs.get(i))) {
 								report(" Banner issue matches with the expected :" + inputs.get(i), DEBUG);
 								inputs.remove(i);
 								break;
