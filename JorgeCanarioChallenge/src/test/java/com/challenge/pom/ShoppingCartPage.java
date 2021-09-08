@@ -54,7 +54,7 @@ public class ShoppingCartPage extends Base{
 	public Boolean isShoppingCartFormPresent() {
 		report("Verifying that shopping cart table is visible", ACTION);
 		try {
-			report(" Shopping cart table element was not displayed", SUCCESS);
+			report(" Shopping cart table element was displayed", SUCCESS);
 			Boolean output = getShoppingCartForm().isDisplayed();
 			return output;
 		} catch (org.openqa.selenium.NoSuchElementException e) {

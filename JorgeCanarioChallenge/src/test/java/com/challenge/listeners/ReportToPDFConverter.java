@@ -3,6 +3,7 @@ package com.challenge.listeners;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.FileSystems;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -91,9 +92,8 @@ public class ReportToPDFConverter implements IExecutionListener {
 	 */
 	public void deletePreviousRunFiles() {
 
-		File currentProjectDir = new File(System.getProperty("user.dir"));
-		File reportDir = new File(System.getProperty("user.dir") + "/target/surefire-reports");
-
+		File currentProjectDir = FileSystems.getDefault().getPath("").toAbsolutePath().toFile();
+		File reportDir = FileSystems.getDefault().getPath("target", "surefire-reports").toAbsolutePath().toFile(); 
 		deleteFilesWithExtension(currentProjectDir, ".png");
 		deleteFilesWithExtension(reportDir, ".pdf");
 		
@@ -115,8 +115,8 @@ public class ReportToPDFConverter implements IExecutionListener {
 	 * @author Jorge Canario
 	 */
 	public void onExecutionFinish() {
-		String htmlInputFile = System.getProperty("user.dir") + "/target/surefire-reports/emailable-report.html";
-		String pdfOutputFile = System.getProperty("user.dir") + "/target/surefire-reports/emailable-report-" + getDate() + ".pdf";
+		String htmlInputFile = FileSystems.getDefault().getPath("target", "surefire-reports", "emailable-report.html").toAbsolutePath().toString();
+		String pdfOutputFile = FileSystems.getDefault().getPath("target", "surefire-reports", "emailable-report-" + getDate() + ".pdf").toAbsolutePath().toString();  
 		convertHTMLFileToA4PDF(htmlInputFile, pdfOutputFile);
 		System.out.print("New PDF file created: " + pdfOutputFile);
 	}

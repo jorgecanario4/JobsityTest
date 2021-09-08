@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.FileSystems;
 
 import javax.imageio.ImageIO;
 
@@ -68,8 +69,8 @@ public class WebPageVisualTest {
           
           try {
               eyes.open("Jobsity Challenge - Item #2", "Jobsity Challenge - Pixel Perfect Validation", new RectangleSize(1200, 600));
-//              BufferedImage img = ImageIO.read(new File(System.getProperty("user.dir")+"/src/test/resources/References/indexPagePixelPerfectBaseline.jpg"));
-              BufferedImage img = ImageIO.read(new File(System.getProperty("user.dir")+"/pixelPerfectviewport1200pxCmpImg.jpg"));
+//              BufferedImage img = ImageIO.read(FileSystems.getDefault().getPath("src", "test","resources","References","indexPagePixelPerfectBaseline.jpg").toAbsolutePath().toFile());
+              BufferedImage img = ImageIO.read(FileSystems.getDefault().getPath("pixelPerfectviewport1200pxCmpImg.jpg").toAbsolutePath().toFile());
               eyes.check("Image buffer", Target.image(img));
               eyes.close();
           } catch(IOException ex){

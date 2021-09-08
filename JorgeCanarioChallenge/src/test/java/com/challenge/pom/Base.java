@@ -2,6 +2,8 @@ package com.challenge.pom;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -80,42 +82,38 @@ public class Base {
 		Boolean isMac = opSys.indexOf("mac") >= 0;
 		Boolean isWindows = opSys.indexOf("window") >= 0;
 		Boolean isLinux = opSys.indexOf("nix") >= 0 || opSys.indexOf("nux") >= 0 || opSys.indexOf("aix") > 0;
-		
+			
 		switch (browser) {
 		case "Firefox":
 			if(isMac) {
-				System.setProperty("webdriver.gecko.driver", "src/test/resources/BrowserDriver/MacOS_BrowserDrivers/geckodriver");
+				System.setProperty("webdriver.gecko.driver", FileSystems.getDefault().getPath("src", "test","resources","BrowserDriver", "MacOS_BrowsersDrivers", "geckodriver").toAbsolutePath().toString());
 			} else if (isWindows) {
-				System.setProperty("webdriver.gecko.driver", "src/test/resources/BrowserDriver/Windows_BrowserDrivers/geckodriver.exe");
+				System.setProperty("webdriver.gecko.driver", FileSystems.getDefault().getPath("src", "test","resources","BrowserDriver", "Windows_BrowsersDrivers", "geckodriver.exe").toAbsolutePath().toString());
 			} else if(isLinux) {
-				System.setProperty("webdriver.gecko.driver", "src/test/resources/BrowserDriver/Linux_BrowserDrivers/geckodriver");
+				System.setProperty("webdriver.gecko.driver", FileSystems.getDefault().getPath("src", "test","resources","BrowserDriver", "Linux_BrowsersDrivers", "geckodriver").toAbsolutePath().toString());
 			} else {
 				System.out.println("Your Operative System is not supported by the Application!!!");
 			}
 			driver = new FirefoxDriver();
 			break;
 		case "Safari":
-			if(isMac) {
-				driver = new SafariDriver();
-			} else {
-				System.out.println("Your Operative System is not supported by the Application!!!");
-			}
+			if(!isMac) 
+				report("Your Operative System is not supported by the Application!!!", FAILURE);
+			driver = new SafariDriver();
 			break;
 		case "IE 11":
-			if(isWindows) {
-				System.setProperty("webdriver.ie.driver", "src/test/resources/BrowserDriver/Windows_BrowserDrivers/Windows8.1-KB2990999-x86.msu");
-				driver = new InternetExplorerDriver();
-			} else {
-				System.out.println("Your Operative System is not supported by the Application!!!");
-			}
+			if(!isWindows) 
+				report("Your Operative System is not supported by the Application!!!", FAILURE);
+			System.setProperty("webdriver.ie.driver", FileSystems.getDefault().getPath("src", "test","resources","BrowserDriver", "Windows_BrowsersDrivers", "Windows8.1-KB2990999-x86.msu").toAbsolutePath().toString());
+			driver = new InternetExplorerDriver();
 			break;
 		case "Chrome":
 			if(isMac) {
-				System.setProperty("webdriver.chrome.driver", "src/test/resources/BrowserDriver/MacOS_BrowserDrivers/chromedriver");	
+				System.setProperty("webdriver.chrome.driver", FileSystems.getDefault().getPath("src", "test","resources","BrowserDriver", "MacOS_BrowsersDrivers", "chromedriver").toAbsolutePath().toString());	
 			} else if (isWindows) {
-				System.setProperty("webdriver.chrome.driver", "src/test/resources/BrowserDriver/Windows_BrowserDrivers/chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", FileSystems.getDefault().getPath("src", "test","resources","BrowserDriver", "Windows_BrowsersDrivers", "chromedriver.exe").toAbsolutePath().toString());
 			} else if(isLinux) {
-				System.setProperty("webdriver.chrome.driver", "src/test/resources/BrowserDriver/Linux_BrowserDrivers/chromedriver");
+				System.setProperty("webdriver.chrome.driver", FileSystems.getDefault().getPath("src", "test","resources","BrowserDriver", "Linux_BrowsersDrivers", "chromedriver").toAbsolutePath().toString());
 			} else {
 				System.out.println("Your Operative System is not supported by the Application!!!");
 			}
@@ -123,6 +121,7 @@ public class Base {
 			break;
 
 		}
+		
 
 		driver.manage().window().maximize();
 		return driver;
@@ -411,14 +410,13 @@ public class Base {
 		report(" Taking screenshot", DEBUG);
 		File scrnshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String fileName = driver.getTitle().replaceAll(" ", "_") + "--" + getDate();
-		File scrnshotName = new File("./" + fileName + ".png");
+		File scrnshotName = FileSystems.getDefault().getPath(fileName + ".png").toAbsolutePath().toFile();
 		try {
 			FileUtils.copyFile(scrnshot, scrnshotName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Reporter.log("<br><img src='" + System.getProperty("user.dir") + "/" + fileName
-				+ ".png' height='420' width='720'><br>");
+		Reporter.log("<br><img src='" + scrnshotName.toString() + "' height='420' width='720'><br>");
 		
 
 	}
@@ -463,7 +461,7 @@ public class Base {
 	public void takeFullDOMScrnshot() {
 		Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1200)).takeScreenshot(driver);
         try {
-            ImageIO.write(screenshot.getImage(),"JPG",new File(System.getProperty("user.dir")+"/pixelPerfectviewport1200pxCmpImg.jpg"));
+            ImageIO.write(screenshot.getImage(),"JPG", FileSystems.getDefault().getPath("pixelPerfectviewport1200pxCmpImg.jpg").toAbsolutePath().toFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
