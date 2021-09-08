@@ -75,20 +75,50 @@ public class Base {
 	 * @author Jorge Canario
 	 */
 	public WebDriver driverConnection(String browser) {
+		
+		String opSys = System.getProperty("os.name").toLowerCase();
+		Boolean isMac = opSys.indexOf("mac") >= 0;
+		Boolean isWindows = opSys.indexOf("window") >= 0;
+		Boolean isLinux = opSys.indexOf("nix") >= 0 || opSys.indexOf("nux") >= 0 || opSys.indexOf("aix") > 0;
+		
 		switch (browser) {
 		case "Firefox":
-			System.setProperty("webdriver.gecko.driver", "src/test/resources/BrowserDriver/geckodriver");
+			if(isMac) {
+				System.setProperty("webdriver.gecko.driver", "src/test/resources/BrowserDriver/MacOS_BrowserDrivers/geckodriver");
+			} else if (isWindows) {
+				System.setProperty("webdriver.gecko.driver", "src/test/resources/BrowserDriver/Windows_BrowserDrivers/geckodriver.exe");
+			} else if(isLinux) {
+				System.setProperty("webdriver.gecko.driver", "src/test/resources/BrowserDriver/Linux_BrowserDrivers/geckodriver");
+			} else {
+				System.out.println("Your Operative System is not supported by the Application!!!");
+			}
 			driver = new FirefoxDriver();
 			break;
 		case "Safari":
-			driver = new SafariDriver();
+			if(isMac) {
+				driver = new SafariDriver();
+			} else {
+				System.out.println("Your Operative System is not supported by the Application!!!");
+			}
 			break;
 		case "IE 11":
-			System.setProperty("webdriver.ie.driver", "src/test/resources/BrowserDriver/Windows8.1-KB2990999-x86.msu");
-			driver = new InternetExplorerDriver();
+			if(isWindows) {
+				System.setProperty("webdriver.ie.driver", "src/test/resources/BrowserDriver/Windows_BrowserDrivers/Windows8.1-KB2990999-x86.msu");
+				driver = new InternetExplorerDriver();
+			} else {
+				System.out.println("Your Operative System is not supported by the Application!!!");
+			}
 			break;
 		case "Chrome":
-			System.setProperty("webdriver.chrome.driver", "./src/test/resources/BrowserDriver/chromedriver");
+			if(isMac) {
+				System.setProperty("webdriver.chrome.driver", "src/test/resources/BrowserDriver/MacOS_BrowserDrivers/chromedriver");	
+			} else if (isWindows) {
+				System.setProperty("webdriver.chrome.driver", "src/test/resources/BrowserDriver/Windows_BrowserDrivers/chromedriver.exe");
+			} else if(isLinux) {
+				System.setProperty("webdriver.chrome.driver", "src/test/resources/BrowserDriver/Linux_BrowserDrivers/chromedriver");
+			} else {
+				System.out.println("Your Operative System is not supported by the Application!!!");
+			}
 			driver = new ChromeDriver();
 			break;
 
